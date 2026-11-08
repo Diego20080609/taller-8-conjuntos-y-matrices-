@@ -127,4 +127,85 @@ if name == "diego"
     mostrar_analisis(ventas)
 
 
+""""""""""""""""""""""""""""""""""""""""" CODIGO PARTE 2 MATRICES """""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Ejercicio 2: análisis de participación en cursos usando conjuntos (set).
+Las operaciones se resuelven con operadores de conjuntos: | & - ^ <=
+"""
+
+curso_A = {"Ana", "Carlos", "Laura", "Pedro", "Sofia", "Andres", "Camila"}
+curso_B = {"Laura", "Pedro", "Daniel", "Sofia", "Mateo", "Valentina"}
+
+
+def formato(conjunto):
+    """Solo para imprimir: muestra el conjunto ordenado alfabéticamente."""
+    if not conjunto:
+        return "(ninguno)"
+    return ", ".join(sorted(conjunto))
+
+
+def mostrar_resultados(a, b):
+    print("\n=== 1. Estudiantes inscritos en cada curso ===")
+    print(f"Curso A (Fundamentos de programación): {formato(a)}")
+    print(f"Curso B (Introducción a bases de datos): {formato(b)}")
+
+    print("\n=== 2. Estudiantes diferentes en total (unión) ===")
+    print(f"Cantidad: {len(a | b)}")
+    print(f"Listado: {formato(a | b)}")
+
+    print("\n=== 3. Inscritos en ambos cursos (intersección) ===")
+    print(formato(a & b))
+
+    print("\n=== 4. Inscritos únicamente en el curso A (A - B) ===")
+    print(formato(a - b))
+
+    print("\n=== 5. Inscritos únicamente en el curso B (B - A) ===")
+    print(formato(b - a))
+
+    print("\n=== 6. Inscritos en exactamente uno de los dos (A ^ B) ===")
+    print(formato(a ^ b))
+
+    print("\n=== 7. ¿Todos los del curso A están también en el B? (A <= B) ===")
+    if a <= b:
+        print("Sí, todos los estudiantes del curso A están inscritos en el B.")
+    else:
+        print("No, hay estudiantes del curso A que no están inscritos en el B.")
+
+
+def agregar_estudiante(a, b):
+    """8. Agrega un estudiante a cualquiera de los dos cursos."""
+    print("\n=== AGREGAR UN NUEVO ESTUDIANTE ===")
+    while True:
+        curso = input("¿A qué curso desea agregarlo? (A/B): ").strip().upper()
+        if curso in ("A", "B"):
+            break
+        print("  Opción no válida. Escriba A o B.")
+
+    while True:
+        nombre = input("Nombre del estudiante: ").strip().title()
+        if nombre:
+            break
+        print("  El nombre no puede estar vacío.")
+
+    destino = a if curso == "A" else b
+    if nombre in destino:
+        print(f"{nombre} ya estaba inscrito en el curso {curso} "
+              "(el conjunto no guarda duplicados).")
+    else:
+        destino.add(nombre)
+        print(f"{nombre} fue agregado al curso {curso}.")
+
+
+def main():
+    print("########## RESULTADOS INICIALES ##########")
+    mostrar_resultados(curso_A, curso_B)
+
+    agregar_estudiante(curso_A, curso_B)
+
+    print("\n########## RESULTADOS ACTUALIZADOS ##########")
+    mostrar_resultados(curso_A, curso_B)
+
+
+if _name_ == "_main_":
+
 if _name_ == "_main_":
